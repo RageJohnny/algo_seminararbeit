@@ -1,0 +1,281 @@
+---
+title: "Reinforcement Learning"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(readr)
+library(dplyr)
+library(expm)
+library(markovchain)
+library(diagram)
+library(pracma)
+library(ReinforcementLearning)
+
+```
+
+### *Charakteristiken von Reinforcement Learning*
+
+* Kein Supervisor, nur ein Reward Signal
+* Feedback erfolgt verzögert, nicht sofort
+* Zeitabhängigkeit 
+* Aktionen des Agenten beeinflussen die Daten, die er erhält
+
+### *Rewards*
+
+* Eine Belohnung/Reward (Rt) ist ein skalares Feedback Signal
+* Gibt an, wie gut der Agent bei Step t agiert
+* Der Job des Agenten ist es den kumulativen Reward zu maximieren
+
+<center>**Reinforcement Learning basiert auf der „Reward-Hypothesis“**</center>
+
+<center>**Alle Ziele können durch Maximieren des erwarteten cumulativen Rewards beschrieben werden**</center>
+
+
+### *Sequentielles Decision Making*
+
+* Ziel: Auswahl von Maßnahmen zur Maximierung der zukünftigen Reward
+* Maßnahmen können langfristige Folgen haben
+* Belohnung kann sich verzögern
+* Es kann besser sein, die unmittelbare Belohnung zu opfern, um eine langfristige Belohnung zu erhalten
+
+### *Markov Decision Process*
+
+Der Markov Decision Process muss die Anforderungen einer Markov Property erfüllen!
+
+<center>*Markov Property requires that “the future is independent of the past given the present”*</center></p>
+<center>**Formel**</center>
+<center>$P(X_{t+1} = s | X_t = s_{t} ,  X_{t−1} = s_{t−1}, . . . , X_0 = s_0) = P(X_{t+1} = s | X_t = s_t)$ </center></p>
+
+<center>*Erklärung zur Formel:*</center>
+
+<center>**$X_t$ ist abhängig von X aber ist nicht abhängig von $X_{t-1},..., X_1, X_0$**</center></p>
+
+### *Zustandsübergangswahrscheinlichkeit (State Transition Probability)*
+
+Annahme: Wir befinden uns in Status s. </p>
+Die State Transition Probability gibt nun an mit welcher Wahrscheinlichkeit der nächste Status $s_+1$ eintreten wird.</p>
+<center>**Formel:**</center>
+
+<center> $P_{ss'} = P[S_{s+1} = s']| S_t = s$</center></p>
+
+Zusätzlich können alle Zustandsübergänge in einer Übergangsmatrix angezeigt werden:
+<center>![Zustandsübergangswahrscheinlichkeiten](C:\Users\JohnnyRage\Desktop\MasterStudium 2020\Semi\STP_1.png)</center></p>
+
+Jede Reihe zegit die Zustandsübergangswahrscheinlichkeiten von einem Status zu allen anderen möglichen Status.
+
+### *Markov Process / Markov Chain*
+
+* Sequenz von zufälligen Status mit Markov Property
+
+Wir definieren hier folgende Parameter:
+
+* S: endliches Set aus Status
+* P : Zustandsübertragsungswahrscheinlichkeiten welcher als Matrix festgelegt wird. 
+
+<center>![Markov Chain](C:\Users\JohnnyRage\Desktop\MasterStudium 2020\Semi\MKC_1.png)</center>
+
+Die entsprechenden State Transition Probabilites dazu: 
+
+<center>![Zustandsübergangswahrscheinlichkeiten für die Markov Chain](C:\Users\JohnnyRage\Desktop\MasterStudium 2020\Semi\STP_MK.png)</center>
+
+
+## *Markov Chain mit vorhandenen Regen Daten*
+
+### *Erstellen der Transition Matrix*
+
+```{r markovchain_matrix}
+data(rain)
+mysequence<-rain$rain
+createSequenceMatrix(mysequence)
+
+
+head(rain)
+
+myFit<-markovchainFit(data=mysequence,confidencelevel = .9,method = "mle")
+myFit
+
+alofiMc<-myFit$estimate
+alofiMc
+
+
+a11=alofiMc[1,1]
+a12=alofiMc[1,2]
+a13=alofiMc[1,3]
+a21=alofiMc[2,1]
+a22=alofiMc[2,2]
+a23=alofiMc[2,3]
+a31=alofiMc[3,1]
+a32=alofiMc[3,2]
+a33=alofiMc[3,3]
+
+## Hard code the transition matrix
+stateNames <- c("Kein Regen","Leichter Regen","Schwerer Regen")
+ra <- matrix(c(a11,a12,a13,a21,a22,a23,a31,a32,a33),nrow=3, byrow=TRUE)
+#ra <- matrix(c(0.660,0.230,0.110,0.463,0.306,0.231,0.198,0.312,0.490),nrow=3, byrow=TRUE)
+
+dtmcA <- new("markovchain",transitionMatrix=ra, states=c("Kein Regen","Leichter Regen","Schwerer Regen"), name="MarkovChain A") 
+
+dtmcA
+
+
+plot(dtmcA)
+```
+
+### *Plotmat Diagramm zur besseren Übersichtlichkeit*
+```{r markovchain_plot}
+row.names(ra) <- stateNames; colnames(ra) <- stateNames
+ra = round(ra,3)
+plotmat(ra,pos = c(1,2), 
+        lwd = 1, box.lwd = 2, 
+        cex.txt = 0.8, 
+        box.size = 0.1, 
+        box.type = "circle", 
+        box.prop = 0.5,
+        box.col = "light blue",
+        arr.length=.1,
+        arr.width=.1,
+        self.cex = .4,
+        self.shifty = -.01,
+        self.shiftx = .13,
+        main = "Markov Chain Transition Matrix")
+```
+
+### *Feststellung des aktuellen Status*
+```{r markovchain_currenstate}
+##Wir gehen davon aus dass es heute nicht regnet!
+x1 <- matrix(c(1,0,0),nrow=1, byrow=TRUE)
+```
+
+### *Feststellung ob es morgen regnen wird*
+```{r markovchain_tomorrow}
+x1 %*% ra
+```
+
+### *Vorraussage des Wetters für die nächsten 7 Tage*
+```{r markovchain_forecast}
+ra2 <- ra %^% 2
+ra3 <- ra %^% 3
+ra4 <- ra %^% 4
+ra5 <- ra %^% 5
+ra6 <- ra %^% 6
+ra7 <- ra %^% 7
+cat("Vorhersage Tag 1")
+
+round(x1%*%ra,3)
+
+cat("Vorhersage Tag 2")
+
+round(x1%*%ra2,3)
+
+cat("Vorhersage Tag 3")
+
+round(x1%*%ra3,3)
+
+cat("Vorhersage Tag 4")
+
+round(x1%*%ra4,3)
+
+cat("Vorhersage Tag 5")
+
+round(x1%*%ra5,3)
+
+cat("Vorhersage Tag 6")
+
+round(x1%*%ra6,3)
+
+cat("Vorhersage Tag 7")
+
+round(x1%*%ra7,3)
+
+
+ra7=round(ra7,3)
+
+plotmat(ra7,pos = c(1,2), 
+        lwd = 1, box.lwd = 2, 
+        cex.txt = 0.8, 
+        box.size = 0.1, 
+        box.type = "circle", 
+        box.prop = 0.5,
+        box.col = "light blue",
+        arr.length=.1,
+        arr.width=.1,
+        self.cex = .6,
+        self.shifty = -.01,
+        self.shiftx = .14,
+        main = "Transitionmatrix nach 7 Tagen")
+```
+
+## *Markov Reward Process*
+
+Wir können in den Beispielen eindeutig sehen, das wir bisher noch nicht mit dem sog. Reward gearbeitet haben. </P>Aus diesem Grund implementieren wir nun einen Reward Value in unsere Markov Chain und definieren wieder unsere Parameter:
+
+*S: endliches Set aus Status
+*P: Zustandsübertragungswahrscheinlichkeiten
+*R: Reward
+*Gamma:$\gamma$ Discount Faktor</p>
+
+<center>**Unser Ziel sollte es sein, den Return Value zu maximieren!**</center>
+
+<center>**Formel:**</center> 
+
+<center>$G_t = R_{t+1} + \gamma R_{t+2} + ...$</center></p>
+
+<center>*$G_t$ wird auf Basis einer zufälligen Sample Sequence berechent*</center>
+
+Daraus ergibt sich wiederum folgende Markov Chain:
+
+<center>![Markov Chain mit Reward](C:\Users\JohnnyRage\Desktop\MasterStudium 2020\Semi\MKC_2.png)</center>
+
+## Value Funktion für den Markov Reward Process
+
+<center>**Formel:**</center>
+<center>$v(s) = E[G_t|S_t = s]$</center></p>
+
+Wir durchlaufen hier also verschiedene Stadien mit unterschiedlichen Samples. Ziel hiervon ist es, festzustellen, welche Status den höchsten approximierten Reward bieten. 
+
+Die nachfolgende Grafik dient zur Veranschaulichung der Value Funktion: 
+
+<center>![Markov Chain mit Reward](C:\Users\JohnnyRage\Desktop\MasterStudium 2020\Semi\MRC_1.png)</center>
+
+Die Value Funktion können wir auf zwei elementare Teile herunterbrechen:
+
+* Immediate Reward: $R_{t+1}$
+* Gamma: $\gamma$
+
+Mithilfe dieser beiden Informationen können wir die bereits existierende Value Funktion erweitern:
+
+<center>**Formel:** </center>
+
+<center>$v(s) = R_s + \gamma \sum_{s'\in  S} P_{ss'}v(s')$</center></p>
+
+## Markov Reward Process Beispiel
+
+Wir denken uns folgendes Beispiel aus. Der Agent soll auf die Suche nach dem Ziel sein. Der Agent kann sich in einem 2x2 Grid frei bewegen. 
+
+<center>![Markov Reward Beispiel](C:\Users\JohnnyRage\Desktop\MasterStudium 2020\Semi\mkcr_1.PNG)</center></p>
+
+
+```{r markovreward}
+#?gridworldEnvironment
+env <- gridworldEnvironment
+print(env)
+
+states <- c("s1", "s2", "s3", "s4")
+states
+actions <- c("up", "down","left", "right" )
+actions
+
+data <- sampleExperience(N=1000, env = env, states = states, actions = actions)
+
+head(data)
+
+control <- list(alpha = 0.1, gamma = 0.5, epsilon = 0.1)
+control
+#?ReinforcementLearning
+model <- ReinforcementLearning(data, s = "State", a = "Action", r = "Reward", s_new = "NextState", control = control)
+print(model)
+```
+
+
