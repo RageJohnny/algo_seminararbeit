@@ -1,0 +1,77 @@
+---
+title: "Explainability"
+output:
+  html_document:
+    df_print: paged
+---
+
+Explainability
+Übersicht
+Interpretierbarkeit
+Wichtigkeit der Interpretierbarkeit
+Taxonomie der Interpretierbarkeit
+Eigenschaften von Erläuterungen
+Menschenfreundliche Erläuterungen
+Interpretierbare Modelle
+Lineare Regression
+Logistische Regression
+GLM und GAM
+Entscheidungsbäume
+Entscheidungsregeln
+RuleFit
+Andere Modelle
+Model-Agnostische Methoden
+Partial Dependence Plot
+Local Surrogate
+Shapley Values
+SHAP
+1 Interpretierbarkeit
+Im Gegensatz zu vielen anderen statistischen Methoden ist die Interpretierbarkeit nicht auf Mathematik basiert. Tim Miller (2017) hat die Interpretierbarkeits so definiert, dass sie beschreibt wie gut eine Mensch die Ursache von einer Entscheidung verstehen kann. Dies ist vor Allem wichtig, da im Machine Learning der Mensch dem Computer nicht beibringt, wie es zu einer Antwort kommt, sondern der Computer lernt selbst aus den Daten. Interpretierbarkeit kann nur zwischen verschiedenen Modellen gemessen werden und ein Modell ist interpretierbarer wie das andere, wenn ein Mensch dies leichter versteht bzw. leichter den Grund für eine Entscheidung versteht.
+
+1.1 Wichtigkeit der Interpretierbarkeit
+
+Die Frage ist nun, wieso es wichtig ist für einen Menschen ein Machine Learnin Modell zu verstehen, da auch einfach auf den Computer und deren Entscheidung vertraut werden kann. Wie in vielen statistischen Themen existiert hier auch ein Kompromiss. Die beiden Größen sind dabei "Was" und "Warum". In anderen Worten, müssen wir uns entscheiden, ob wir genau wissen wollen was geschieht oder ob wir eher an dem Grund für die Entscheidung interessiert sind. Manche Szenarien benötigen keine Erläuterung, da ein Fehler in der Prädiktion insignifikant ist. In anderen Szenarien, wie z.B. der Krebsvorhersage kann eine Fehlvorhersage drastische Konsequenzen mit sich ziehen. Die Wichtigkeit der Interpretierbarkeit stammt daher, dass die Prädiktion selbst (Was) nicht genügt und es muss auch vorhergesagt werden wie es dazu kam. Um wieder auf das Beispiel mit Brustkrebs zu kommen würde das bedeuten, dass ein Modell nicht nur Vorhersagen muss, dass ein Patient/Patientin Brustkrebs hat sondern auch anhand von welchen Metriken es den Brustkrebs erkennt hat.
+
+Ein weiterer wichtiger Punkt ist, dass Menschen Muster erkennen, die eventuell keine Muster sind und nur zufällig entstanden sind. Dies kann in einigen wissenschaftlichen Test, wie z.B. dem Rohrschachtest bewiesen werden kann (wäre interessant, was ein ML Modell erkennen würde). In anderen Worten kann die Interpretierbarkeit Menschen helfen die Muster zu erkennen und etweilige Fehlschlüsse zu vermeiden.
+
+1.2 Taxonomie der Interpretierbarkeit
+
+Die Methoden für die Interpretierbarkeit von ML Modellen kann nach verschiedenen Kriterien klassifiziert werden.
+
+(a) Intrinsische oder post hoc: Hier wird unterschieden, ob die Interpretierbarkeit durch die Einschränkung der Komplexität (intrinisch) oder durch die Analyse des Modells nach der Trainingsphase (post hoc) gemessen wird. Zu intrinisch interpretierbaren Modellen zählen beispielsweise kurze Entscheidungsbäume, da deren Struktur simpel ist.
+
+(b) Ergebnisse der Interpretationsmethode: Hier gibt es unterschiedliche Methoden welche in folgende Blöcke geliedert werden können (i) Feature Summary Statistik, (ii) Feature Summary Visualization, (iii) Model Internals und (iv) Data Points. (i) Viele Interpretierbarkeits-Methoden geben einen Überblick über die einzelnen Features. Dies kann in der Form von einer oder mehreren Kennzahlen geschehen. (ii) Viele dieser Feature Summaries können auch visualisiert in einer Grfik dargestellt werden. Darüber hinaus benötigen eine Feature Summaries dringend visualsierung, da sie sonst nicht interpretierbar wären, beispielsweise beim Partial Dependence Plot ist dies der Fall. (iii) Die Interpretation von intrinsischen Methoden fällt hier rein. Beispiele wären unter anderem erlernte Baumstrukturen. (iv) Hierrunter fallen alle Methoden, welche Datenpunkte für die Interpretierbarkeit heranziehen. Dabei können die Datenpunkte bereits existieren oder neu erstellt werden. Die Counterfactual Method benutzt dies beispielsweise durch das Erstellen eines Datenpunktes, der recht ähnlich eines existierenden Datenpunkts ist, aber welcher die Vorhersage wesentlich verändert.
+
+(c) Modellspezifisch oder Modellagnostisch: Modellspezifische Intrepationswerkzeuge sind auf spezifische Modelle beschränkt. Die Interpretation von den Koeffizienten von einer Linearen Regression wäre modellspezifische Interpretation. Bei Modellagnostischen Werkzeugen handelt es sich um post hoc Methoden, welche die Input und die Outputs analysieren. Auf die intrinischen Informationen, wie z.B. Koeffizienten oder Strukture haben sie keine einsicht.
+
+(d) Lokal oder Global: Dabei muss die Frage gestellt werden, ob die Intrepretationsmethode einzelne Prädiktionen oder das ganze Modell erläutert. Eventuell kann es auch sein, dass der Umfang zwischen drinnen liegt. Fragen oder Denkanstösse, die dabei helfen können sind beispielsweise (i) wie wurde das Modell erstellt, (ii) Wie macht das Modell Prädiktionen, (iii) Wie beinflussen gewisse Teile des Modells die Prädiktionen, (iv) Wieso hat das Modell eine bestimmte Prädiktion für einen Wert getätigt und (v) Wieso hat das Modell bestimmte Prädiktionen für eine Gruppe von Werten gemacht.
+
+1.3 Eigenschaften von Erläuterungen Die Eigenschaften von Erläuterungen können in zwei grobe Blöcke geteilt werden (a) Eigenschaften von Erläuterungsmethoden und (b) Eingenschaften von individuellen Interpretationen.
+
+(a) Eigenschaften von Erläuterungsmethoden: Dies kann wiederum in folgende Kategorien geteilt werden (i) Ausdruckskraft, (ii) Durchlässigkeit, (iii) Übertragbarkeit und (iv) algorithmische Komplexität. Die Ausdruckskraft (i) beschreibt die Struktur der Interpretation welche die Methode erstellen kann. Dies könnte z.B. eine einfach Wenn X Dann Y Strukur sein, ist aber nicht auf dies beschränkt. Die Durchlässigkeit (ii) beschreibt wie sehr die Methode in das Modell selbst "hineinschaut" um eine Interpretation zu treffen. Die Übertragbarkeit (iii) beschreibt welche ML Modelle mit der demensprechenden Methode interpretiert werden können. Die algorithmische Kompelexität (iv) beschreibt wieviel Rechenaufwand für die Interpretierbarkeit benötigt wird, was wichtig ist sobald Rechenleistung nicht unbegrenzt zur Verfügung steht (also immer).
+
+(b) Eigenschaften von individuellen Interpretationen Dies kann wiederum in folgende neun Kategorien geteilt werden (i) Genauigkeit, (ii) Treue, (iii) Konsistenz, (iv) Stabilität, (v) Verständlichkeit, (vi) Gwissheit, (vii) Wichtigkeitsgrad, (viii) Neuheit und (ix) Vertretung. Die Genauigkeit (i) beschreibt wie gut die Interpretierbarkeit auf neue Daten übertragbar ist. Die Treue (ii) ist in enger Zusammenarbeit mit der Genauigkeit und fokusiert wie gut die Interpretierbarkeit die Prediktion von einem Black-Box-Modell (z.B. Neuronales Netzwerk) approximiert. Die Konsistenz (iii) beschäftigt sich unterdessen damit, wie sich Interpretierbarkeit von zwei Modelle, die mit den gleichen Daten trainiert wurden, unterscheiden. Im Gegensatz dazu misst die Stabilität (iv) die Interpretierbarkeit innerhalb eines Modells zwischen verschiedenen Prediktionen. Die Verständlichkeit (v) ist ganz einfach gesagt, wie gut Menschen die Interpretation verstehen. Die Gewissheit (vi) beschreibt wie sicher ein ML Modell in der Vorhersage ist.
+
+2 Interpretierbare Modelle
+2.1 Lineare Regression
+
+2.2 Logistische Regression
+
+2.3 GLM und GAM
+
+2.4 Entscheidungsbäume
+
+2.5 Entscheidungsregeln
+
+2.6 RuleFit
+
+2.7 Andere Modelle
+
+3 Modell-Agnostische Methoden
+3.1 Partial Dependence Plot
+
+3.2 Local Surrogate
+
+3.3 Shapley Values
+
+3.4 SHAP
