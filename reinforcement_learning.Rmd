@@ -1,0 +1,288 @@
+---
+title: "Reinforcement Learning"
+output: html_document
+
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(readr)
+library(dplyr)
+library(expm)
+library(markovchain)
+library(diagram)
+library(pracma)
+library(ReinforcementLearning)
+
+```
+*Reminder:* While working on this topic i tried to implement some of the methods we created in Video Game Sales dataset. But the results were dissappointing and as in my opinion Reinforcement Learning is not suitable for the given dataset. Despite i wanted to give some Dummy Examples to understand the learned concepts better. Therefore i was using the build in rain dataset.
+
+
+### *Characteristics of Reinforcement Learning*
+
+* No supervisor, only a reward signal
+* Feedback not immediately,  but delayed! 
+* Time indipendent 
+* Actions of the agents influence the data they receive
+
+### *Rewards*
+
+* A Reward (Rt) is a scalable feedback signal
+* Shows how good the agent performs on a certain step t
+* Goal of the agent is to maximize the cumulative reward. 
+
+<center>**Reinforcement Learning is based on the „Reward-Hypothesis“</center>
+
+<center>**All Goals can be described by maximizing their expected cumulative reward**</center>
+
+
+### *Sequential Decision Making*
+
+* Goal: Selection of measures to maximize future Reward
+* Measures can have long-term consequences
+* Reward may be delayed
+* It may be better to sacrifice the immediate reward to obtain a long-term reward
+
+### *Markov Decision Process*
+
+The Markov Decision Process must meet the requirements of a Markov Property!
+
+<center>*Markov Property requires that “the future is independent of the past given the present”*</center></p>
+<center>**Formula:**</center>
+<center>$P(X_{t+1} = s | X_t = s_{t} ,  X_{t−1} = s_{t−1}, . . . , X_0 = s_0) = P(X_{t+1} = s | X_t = s_t)$ </center></p>
+
+<center>*Explanation:*</center>
+
+<center>**$X_t$ is dependend of X but it's not dependend of $X_{t-1},..., X_1, X_0$**</center></p>
+
+### *State Transition Probability*
+
+Assumption: We are in status s. </p>
+The State Transition Probability now indicates the probability with which the next state $s_+1$ will occur.</p>
+<center>**Formula:**</center>
+
+<center> $P_{ss'} = P[S_{s+1} = s']| S_t = s$</center></p>
+
+Additionally, all state transitions can be displayed in a transition matrix:
+<center>![Zustandsübergangswahrscheinlichkeiten](C:\Users\JohnnyRage\Desktop\MasterStudium 2020\Semi\STP_1.png)</center></p>
+
+Each row shows the state transition probabilities from one state to all other possible states.
+
+### *Markov Process / Markov Chain*
+
+*Sequence of random states with Markov property
+
+We define the following parameters here:
+
+* S: finite set of status
+* P: State transition probabilities which are defined as a matrix 
+
+<center>![Markov Chain](C:\Users\JohnnyRage\Desktop\MasterStudium 2020\Semi\markov_chain.png)</center>
+
+The corresponding State Transition Probabilites for this:  
+
+<center>![Zustandsübergangswahrscheinlichkeiten für die Markov Chain](C:\Users\JohnnyRage\Desktop\MasterStudium 2020\Semi\markov_chain_stp.PNG)</center>
+
+
+## *Markov Chain with existing rain data*
+
+### *Creating the Transition Matrix*
+
+```{r markovchain_matrix}
+data(rain)
+mysequence<-rain$rain
+createSequenceMatrix(mysequence)
+
+
+head(rain)
+
+myFit<-markovchainFit(data=mysequence,confidencelevel = .9,method = "mle")
+myFit
+
+alofiMc<-myFit$estimate
+alofiMc
+
+
+a11=alofiMc[1,1]
+a12=alofiMc[1,2]
+a13=alofiMc[1,3]
+a21=alofiMc[2,1]
+a22=alofiMc[2,2]
+a23=alofiMc[2,3]
+a31=alofiMc[3,1]
+a32=alofiMc[3,2]
+a33=alofiMc[3,3]
+
+## Hard code the transition matrix
+stateNames <- c("Kein Regen","Leichter Regen","Schwerer Regen")
+ra <- matrix(c(a11,a12,a13,a21,a22,a23,a31,a32,a33),nrow=3, byrow=TRUE)
+#ra <- matrix(c(0.660,0.230,0.110,0.463,0.306,0.231,0.198,0.312,0.490),nrow=3, byrow=TRUE)
+
+dtmcA <- new("markovchain",transitionMatrix=ra, states=c("Kein Regen","Leichter Regen","Schwerer Regen"), name="MarkovChain A") 
+
+dtmcA
+
+
+plot(dtmcA)
+```
+
+### *Plotmat diagram for better clarity*
+```{r markovchain_plot}
+row.names(ra) <- stateNames; colnames(ra) <- stateNames
+ra = round(ra,3)
+plotmat(ra,pos = c(1,2), 
+        lwd = 1, box.lwd = 2, 
+        cex.txt = 0.8, 
+        box.size = 0.1, 
+        box.type = "circle", 
+        box.prop = 0.5,
+        box.col = "light blue",
+        arr.length=.1,
+        arr.width=.1,
+        self.cex = .4,
+        self.shifty = -.01,
+        self.shiftx = .13,
+        main = "Markov Chain Transition Matrix")
+```
+
+### *Determination of the current status*
+```{r markovchain_currenstate}
+##We assume that it will not rain today!
+x1 <- matrix(c(1,0,0),nrow=1, byrow=TRUE)
+```
+
+### *Determining whether it will rain tomorrow*
+```{r markovchain_tomorrow}
+x1 %*% ra
+```
+
+### *Weather forecast for the next 7 days*
+```{r markovchain_forecast}
+ra2 <- ra %^% 2
+ra3 <- ra %^% 3
+ra4 <- ra %^% 4
+ra5 <- ra %^% 5
+ra6 <- ra %^% 6
+ra7 <- ra %^% 7
+cat("Vorhersage Tag 1")
+
+round(x1%*%ra,3)
+
+cat("Vorhersage Tag 2")
+
+round(x1%*%ra2,3)
+
+cat("Vorhersage Tag 3")
+
+round(x1%*%ra3,3)
+
+cat("Vorhersage Tag 4")
+
+round(x1%*%ra4,3)
+
+cat("Vorhersage Tag 5")
+
+round(x1%*%ra5,3)
+
+cat("Vorhersage Tag 6")
+
+round(x1%*%ra6,3)
+
+cat("Vorhersage Tag 7")
+
+round(x1%*%ra7,3)
+
+
+ra7=round(ra7,3)
+
+plotmat(ra7,pos = c(1,2), 
+        lwd = 1, box.lwd = 2, 
+        cex.txt = 0.8, 
+        box.size = 0.1, 
+        box.type = "circle", 
+        box.prop = 0.5,
+        box.col = "light blue",
+        arr.length=.1,
+        arr.width=.1,
+        self.cex = .6,
+        self.shifty = -.01,
+        self.shiftx = .14,
+        main = "Transitionmatrix nach 7 Tagen")
+```
+
+## *Markov Reward Process*
+
+We can clearly see in the examples that we have not yet worked with the so-called Reward. 
+For this reason we now implement a Reward Value in our Markov Chain and define our parameters again:
+
+*S: finite set of status
+*P: State Transition Probabilites
+*R: Reward
+*Gamma:$\gamma$ Discount Factor</p>
+
+<center>**Our goal should be to maximize the return value!**</center>
+
+<center>**Formula:**</center> 
+
+<center>$G_t = R_{t+1} + \gamma R_{t+2} + ...$</center></p>
+
+<center>*$G_t$ is calculated on the basis of a random sample sequence*</center>
+
+This again results in the following Markov Chain:
+
+<center>![Markov Chain mit Reward](C:\Users\JohnnyRage\Desktop\MasterStudium 2020\Semi\markov_chain_with_reward.png)</center>
+
+## Value Function for the Markov Reward Process
+
+<center>**Forumula:**</center>
+<center>$v(s) = E[G_t|S_t = s]$</center></p>
+
+So here we go through different stages with different samples. The goal of this is to determine which states offer the highest approximated reward. 
+
+The following diagram serves to illustrate the value function:
+
+<center>![Markov Chain mit Reward](C:\Users\JohnnyRage\Desktop\MasterStudium 2020\Semi\markov_chain_value.png)</center>
+
+We can break down the value function into two elementary parts:
+
+* Immediate Reward: $R_{t+1}$
+* Gamma: $\gamma$
+
+With the help of these two pieces of information we can extend the already existing Value function:
+
+<center>**Formel:** </center>
+
+<center>$v(s) = R_s + \gamma \sum_{s'\in  S} P_{ss'}v(s')$</center></p>
+<p></p>
+
+## Markov Reward Process Dummy-Code Example
+
+We think up the following example. The agent is supposed to be searching for the target. The agent can move freely in a 2x2 grid. 
+
+<center>![Markov Reward Beispiel](C:\Users\JohnnyRage\Desktop\MasterStudium 2020\Semi\gridworld.png)</center></p>
+
+
+```{r markovreward}
+#?gridworldEnvironment
+env <- gridworldEnvironment
+print(env)
+
+states <- c("s1", "s2", "s3", "s4")
+states
+actions <- c("up", "down","left", "right" )
+actions
+
+data <- sampleExperience(N=1000, env = env, states = states, actions = actions)
+
+head(data)
+
+control <- list(alpha = 0.1, gamma = 0.5, epsilon = 0.1)
+control
+#?ReinforcementLearning
+model <- ReinforcementLearning(data, s = "State", a = "Action", r = "Reward", s_new = "NextState", control = control)
+print(model)
+```
+Conclusio: After implementing our markov reward process we get the following result. The reward of the last iteration is -351. The reward changes every time we iterate through. One of the next steps would be to try different numbers of iterations to see when we reach the maximum reward. 
+
+
+
