@@ -10,4 +10,4 @@ Introduction
 
 [Part I: Data Science vs Decision Science, O-NOtation, GLMs, Graphical Models](DatavsDecision_ONot_GLMs.html)
 
-[Part IV: Reinforcement Learning](reinforcement_learning.html)
+[Part V: Reinforcement Learning](reinforcement_learning.html)
