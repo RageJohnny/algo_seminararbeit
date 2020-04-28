@@ -1,7 +1,7 @@
 
 # Seminararbeit Algorithmik und Statistik 2 ILV
 ## Videogames Datensatz
-![img/header](header.png)
+![header](img/header.png)
 ###### Nicole Diewald | Paul Leitner | Netchie Dürregger | Albert Moser | Johannes Georg Larcher | Matthias Sammer
 
 
