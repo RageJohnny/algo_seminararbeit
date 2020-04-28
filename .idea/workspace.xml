@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="e3a8d0ab-2f66-4d02-b417-f73cbb56bb3f" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/algo-project-2.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/rSettings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.ipynb_checkpoints/Algorithmik Seminararbeit  Test-checkpoint.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Algorithmik Seminararbeit  Test.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/Algorithmik Seminararbeit  Test.ipynb" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="JupyterTrust" id="a5dbd93d-07d2-45e1-a7d0-ec45ffa3f362" />
+  <component name="ProjectId" id="1a2SehY3mBZSN4LR69mfQ7FpD7n" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="e3a8d0ab-2f66-4d02-b417-f73cbb56bb3f" name="Default Changelist" comment="" />
+      <created>1585932292483</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1585932292483</updated>
+      <workItem from="1585932293640" duration="2355000" />
+      <workItem from="1586001593921" duration="740000" />
+      <workItem from="1588082432673" duration="105000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="2" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="2878" y="503" key="com.intellij.ide.util.TipDialog" timestamp="1586001715460">
+      <screen x="1920" y="0" width="2560" height="1440" />
+    </state>
+    <state x="2878" y="503" key="com.intellij.ide.util.TipDialog/0.887.1920.1080/1920.0.2560.1440@1920.0.2560.1440" timestamp="1586001715460" />
+    <state x="2863" y="306" width="672" height="678" key="search.everywhere.popup" timestamp="1586002328432">
+      <screen x="1920" y="0" width="2560" height="1440" />
+    </state>
+    <state x="2863" y="306" width="672" height="678" key="search.everywhere.popup/0.887.1920.1080/1920.0.2560.1440@1920.0.2560.1440" timestamp="1586002328432" />
+  </component>
+</project>
