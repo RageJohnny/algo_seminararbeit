@@ -43,7 +43,8 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1588231002223</updated>
-      <workItem from="1588231003853" duration="1509000" />
+      <workItem from="1588231003853" duration="2148000" />
+      <workItem from="1588246526314" duration="9715000" />
     </task>
     <servers />
   </component>
@@ -51,9 +52,33 @@
     <option name="version" value="1" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="2696" y="355" width="1007" height="737" key="SettingsEditor" timestamp="1588231220657">
+    <state width="1227" height="480" key="GridCell.Tab.0.bottom" timestamp="1588252712746">
       <screen x="1920" y="0" width="2560" height="1440" />
     </state>
-    <state x="2696" y="355" width="1007" height="737" key="SettingsEditor/0.387.1920.1002/1920.0.2560.1440@1920.0.2560.1440" timestamp="1588231220657" />
+    <state width="1227" height="480" key="GridCell.Tab.0.bottom/0.387.1920.1002/1920.0.2560.1440@1920.0.2560.1440" timestamp="1588252712746" />
+    <state width="1227" height="480" key="GridCell.Tab.0.center" timestamp="1588252712745">
+      <screen x="1920" y="0" width="2560" height="1440" />
+    </state>
+    <state width="1227" height="480" key="GridCell.Tab.0.center/0.387.1920.1002/1920.0.2560.1440@1920.0.2560.1440" timestamp="1588252712745" />
+    <state width="1227" height="480" key="GridCell.Tab.0.left" timestamp="1588252712745">
+      <screen x="1920" y="0" width="2560" height="1440" />
+    </state>
+    <state width="1227" height="480" key="GridCell.Tab.0.left/0.387.1920.1002/1920.0.2560.1440@1920.0.2560.1440" timestamp="1588252712745" />
+    <state width="1227" height="480" key="GridCell.Tab.0.right" timestamp="1588252712746">
+      <screen x="1920" y="0" width="2560" height="1440" />
+    </state>
+    <state width="1227" height="480" key="GridCell.Tab.0.right/0.387.1920.1002/1920.0.2560.1440@1920.0.2560.1440" timestamp="1588252712746" />
+    <state x="2696" y="355" width="1007" height="737" key="SettingsEditor" timestamp="1588250914582">
+      <screen x="1920" y="0" width="2560" height="1440" />
+    </state>
+    <state x="2696" y="355" width="1007" height="737" key="SettingsEditor/0.387.1920.1002/1920.0.2560.1440@1920.0.2560.1440" timestamp="1588250914582" />
+    <state x="630" y="715" key="com.intellij.ide.util.TipDialog" timestamp="1588246527292">
+      <screen x="0" y="387" width="1920" height="1002" />
+    </state>
+    <state x="630" y="715" key="com.intellij.ide.util.TipDialog/0.387.1920.1002/1920.0.2560.1440@0.387.1920.1002" timestamp="1588246527292" />
+    <state x="2347" y="619" width="434" height="167" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1588252838669">
+      <screen x="1920" y="0" width="2560" height="1440" />
+    </state>
+    <state x="2347" y="619" width="434" height="167" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.387.1920.1002/1920.0.2560.1440@1920.0.2560.1440" timestamp="1588252838669" />
   </component>
 </project>
