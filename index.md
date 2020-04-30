@@ -14,7 +14,7 @@ Introduction
 
 [Part III: Bayes Universe](xxx.html)
 
-[Part IV: SVMs](xxx.html)
+[Part IV: SVMs](support_vector_machines.html)
 
 [Part V: Reinforcement Learning](reinforcement_learning.html)
 
