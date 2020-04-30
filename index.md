@@ -8,6 +8,14 @@
 Introduction
 
 
-[Part I: Data Science vs Decision Science, O-NOtation, GLMs, Graphical Models](DatavsDecision_ONot_GLMs.html)
+[Part I: Data Science vs Decision Science, O-Notation, Lasso, Ridge, Graphical Models](DatavsDecision_ONot_GLMs.html)
+
+[Part II: Tree Based Models](xxx.html)
+
+[Part III: Bayes Universe](xxx.html)
+
+[Part IV: SVMs](xxx.html)
 
 [Part V: Reinforcement Learning](reinforcement_learning.html)
+
+[Part VI: Explainability](explainability.html)
