@@ -18,7 +18,7 @@ We will cover 6 Topics in their separate areas as shown below, any modeling can 
 
 [Part II: Tree Based Models](TreeBased Models.html)
 
-[Part III: Bayes Universe](xxx.html)
+[Part III: Bayes Universe](Bayes-Universe_v1.html)
 
 [Part IV: SVMs](support_vector_machines.html)
 
