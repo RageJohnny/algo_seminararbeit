@@ -21,13 +21,12 @@
   <component name="ProjectId" id="1bFbtSvKGgD8ffY0dPGg1SdMcJs" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
-    <option name="showExcludedFiles" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="settings.editor.selected.configurable" value="org.jetbrains.plugins.notebooks.jupyter.connections.configuration.JupyterServerConfigurable" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -45,11 +44,13 @@
       <workItem from="1588401782676" duration="2825000" />
       <workItem from="1588407404234" duration="14935000" />
       <workItem from="1588429159078" duration="905000" />
+      <workItem from="1588438670768" duration="1981000" />
+      <workItem from="1588457114469" duration="4320000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="1" />
+    <option name="version" value="2" />
   </component>
   <component name="WindowStateProjectService">
     <state width="992" height="135" key="GridCell.Tab.0.bottom" timestamp="1588429867172">
@@ -92,10 +93,10 @@
     </state>
     <state width="1876" height="480" key="GridCell.Tab.1.right/0.360.1920.1080/1920.0.2560.1440@0.360.1920.1080" timestamp="1588282329565" />
     <state width="1995" height="135" key="GridCell.Tab.1.right/0.387.1920.1002/1920.0.2560.1440@1920.0.2560.1440" timestamp="1588429099423" />
-    <state x="2696" y="355" width="1007" height="737" key="SettingsEditor" timestamp="1588429265943">
+    <state x="2696" y="355" width="1007" height="737" key="SettingsEditor" timestamp="1588458315506">
       <screen x="1920" y="0" width="2560" height="1440" />
     </state>
-    <state x="2696" y="355" width="1007" height="737" key="SettingsEditor/0.387.1920.1002/1920.0.2560.1440@1920.0.2560.1440" timestamp="1588429265943" />
+    <state x="2696" y="355" width="1007" height="737" key="SettingsEditor/0.387.1920.1002/1920.0.2560.1440@1920.0.2560.1440" timestamp="1588458315506" />
     <state x="2760" y="471" key="com.intellij.ide.util.TipDialog" timestamp="1588429195708">
       <screen x="1920" y="0" width="2560" height="1440" />
     </state>
