@@ -13161,7 +13161,7 @@ random small tweak that decorrelates the trees. It is given by,</p>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [172]:</div>
+<div class="prompt input_prompt">In [212]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#Loading libraries</span>
@@ -13186,7 +13186,7 @@ random small tweak that decorrelates the trees. It is given by,</p>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [173]:</div>
+<div class="prompt input_prompt">In [213]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#Loading dataset</span>
@@ -13207,7 +13207,7 @@ random small tweak that decorrelates the trees. It is given by,</p>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [174]:</div>
+<div class="prompt input_prompt">In [214]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#brief information of the dataset</span>
@@ -13254,9 +13254,17 @@ memory usage: 1.4+ MB
 </div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The video game dataset has more or less 16000 records with 11 features "Rank", "Name", "Platform", "Year", "Genre", "Publisher", "NA_Sales", "EU_Sales", "JP_Sales", "Other_Sales" and "Global_Sales"</p>
+
+</div>
+</div>
+</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [175]:</div>
+<div class="prompt input_prompt">In [215]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#overview of the missing value in the dataset</span>
@@ -13273,7 +13281,7 @@ memory usage: 1.4+ MB
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[175]:</div>
+    <div class="prompt output_prompt">Out[215]:</div>
 
 
 
@@ -13301,7 +13309,7 @@ dtype: int64</pre>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [176]:</div>
+<div class="prompt input_prompt">In [216]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#All the missing values are just dropped. There is only few of them than the total number of records in the dataset</span>
@@ -13315,7 +13323,7 @@ dtype: int64</pre>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [177]:</div>
+<div class="prompt input_prompt">In [217]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#Set year as an index </span>
@@ -13329,7 +13337,7 @@ dtype: int64</pre>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [178]:</div>
+<div class="prompt input_prompt">In [218]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#descriptive analysis of the dataset</span>
@@ -13346,7 +13354,7 @@ dtype: int64</pre>
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[178]:</div>
+    <div class="prompt output_prompt">Out[218]:</div>
 
 
 
@@ -13827,7 +13835,7 @@ dtype: int64</pre>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>We converted all the categorical variables into numeric, from the statistical point of view we cannot calculate anything with qualitative data, we need to recode them numerically. The heatmap above is showing collineary between regional sales and global sales, which is pretty obvious. Luckily, tree-model algorithms are immune to multicollinearity by nature. There is no assumptions on relationship between features. In this exercise, we predict global sales given all other features namely the 'Name' of the videogame, 'Platform' the games is played, Genre, Publisher, NA_Sales, EU_Sales, JP_Sales, and Other_Sales. Before doing any analysis we need to prepare the dataset like treating missing values by imputing median or mean, and normalizing the data in order to achieve a much more reliable results. We split the dataset into train and test set. The training set contains a known output and the model learns on this data in order to be generalized to other data later on. We have the test dataset  in order to test our model's prediction. We need a model that performs well on dataset that it has never seen before.</p>
+<p>We converted all the categorical variables into numeric, from the statistical point of view we cannot calculate anything with qualitative data, we need to recode them numerically. The heatmap above is showing collineary between regional sales and global sales, which is pretty obvious. Luckily, tree-model algorithms are immune to multicollinearity by nature. There is no assumptions on relationship between features. In this exercise, we predict global sales given all other features namely the 'Rank', 'Name' of the videogame, 'Platform' the games is played, Genre, Publisher, NA_Sales, EU_Sales, JP_Sales, and Other_Sales. We wanted to include all variables to see how tree models identify feature importance. Before doing any analysis we need to prepare the dataset like treating missing values by imputing median or mean, and normalizing the data in order to achieve a much more reliable results. We split the dataset into train and test set. The training set contains a known output and the model learns on this data in order to be generalized to other data later on. We have the test dataset  in order to test our model's prediction. We need a model that performs well on dataset that it has never seen before.</p>
 
 </div>
 </div>
@@ -14240,7 +14248,7 @@ Other_Sales_ 8:	  0.01069
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Boosting gave is r2 = 77%, MSE 2.96 and accuracy 97%. The company overall rank is also the most important feature variable, with 90% contribution to the model performance.</p>
+<p>Boosting gave is r2 = 77%, MSE 2.96 and accuracy 97%. The company overall rank is also the most important feature variable, with 90% contribution to the model performance europe and north america sales also contributed 5% and 4% respectively. 77% of the variance can be explained by the boosting model which is just 2% more than the decision tree performance in the dataset. If we look at the graph, we almost predicted the true value with 97% accuracy.</p>
 
 </div>
 </div>
@@ -14422,6 +14430,14 @@ Other_Sales_ 8:	  0.01477
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
+<p>Random forest is known to be powerful model as well. It provides improvement over bagged trees by way of a random small tweak that decorrelates the trees that we have been mentioning on the first part of this post. 76% of the variance can be explained by random forest model with MSE 3.14 and 97% accuracy. The overall company rank shows to be the most important feature in the model performance. All the features play a role in the model performance by a small percentages.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
 <h4 id="Bagging">Bagging<a class="anchor-link" href="#Bagging">¶</a></h4>
 </div>
 </div>
@@ -14488,7 +14504,7 @@ bagging_mse:  3.391608815438551
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>73% of the variance can be explain by the Bagging method with MSE 3.39 and accuracy 96%. Bagging method does not use feature importance in assesing which features are important in determining global sales.</p>
+<p>73% of the variance can be explain by the Bagging method with MSE 3.39 and accuracy 96%. Bagging method does not use feature importance in assesing which features are important in predicting global sales. This will be discussed later on.</p>
 
 </div>
 </div>
@@ -14534,7 +14550,7 @@ bagging_mse:  3.391608815438551
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Conclusion">Conclusion<a class="anchor-link" href="#Conclusion">¶</a></h2><p>The vgsales dataset was used to apply tree-based modelling. Approximately 16000 observations were used to predict video games in the global market given it's rank, name, platform, genre and publisher and it's regional sales. Decision tree, bagging, boosting and random forest methods have been use to contruct strong models to predict global market sales of all video games. All the methods have identified "Rank" feature to be the most important variable that contributes to the model performance. The below is the summary of how each model perform in the dataset. Apparently, their performances are pretty much almost the same.</p>
+<h2 id="Conclusion">Conclusion<a class="anchor-link" href="#Conclusion">¶</a></h2><p>The vgsales dataset was used to apply tree-based modelling. Approximately 16000 observations were used to predict video games in the global market given it's rank, name, platform, genre and publisher and it's regional sales. Decision tree, bagging, boosting and random forest methods have been use to contruct strong models to predict global market sales of all video games. All the methods have identified "Rank" feature to be the most important variable that contributes to the model performance. The below is the summary of how each model perform in the dataset. Apparently, their performances are pretty much almost the same. This post can still be improved with all other models and more advance techniques in data pre-processing and modelling.</p>
 <p><strong>Decision tree:</strong></p>
 <ul>
 <li><strong>r2:</strong>    75%</li>
